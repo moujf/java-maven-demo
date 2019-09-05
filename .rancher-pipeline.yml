@@ -1,0 +1,13 @@
+stages:
+- name: 编译
+  steps:
+  - publishImageConfig:
+      dockerfilePath: ./Dockerfile
+      buildContext: .
+      tag: java-maven-demo
+- name: 部署
+  steps:
+  - applyYamlConfig:
+      path: ./deployment.yaml
+timeout: 60
+notification: {}
