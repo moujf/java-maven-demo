@@ -1,5 +1,16 @@
 stages:
 - name: 编译
+  image: maven:3.6-alpine
+  command:
+  - mvn package
+  tty: true
+  env:
+  - name: CONTAINER_ENV_VAR
+  value: maven
+  volumeMounts:
+  - name: repo-maven-cache
+  mountPath: /root/.m2
+- name: 发布镜像
   steps:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
